@@ -10,21 +10,25 @@ import BottomNavBar from "@/components/NavBar";
 import { useEffect } from "react";
 import { useSuiClient } from "@mysten/dapp-kit";
 
+import { useRouter } from "next/router";
+
 export default function Auth() {
   const { handled } = useAuthCallback();
   const client = useSuiClient();
   const enokiFlow = useEnokiFlow();
 
+  const router = useRouter();
+
   useEffect(() => {
     if (handled) {
-      handleButtonClick();
+      handleConnection();
     }
   }, [handled]);
 
-  async function handleButtonClick() {
-    // Get the keypair for the current user.
+  async function handleConnection() {
     const keypair = await enokiFlow.getKeypair();
-    console.log("here is the public key:", keypair.getPublicKey().toSuiAddress());
+    console.log("User connected - Public key:", keypair.getPublicKey().toSuiAddress());
+    router.push("/match");
   }
 
   return (
