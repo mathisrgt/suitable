@@ -7,16 +7,37 @@ import BottomNavBar from "@/components/NavBar";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { useEnokiFlow } from '@mysten/enoki/react';
+import { google_client_id } from "@/environment/zkLogin";
+
 export default function Home() {
   const [user, setUser] = useState(null);
 
-  const handleLogin = async () => {
-    try {
-      // const userData = await zkLogin(); // zkLogin function triggers the Sui zkLogin flow
-      //setUser(userData);
-    } catch (error) {
-      console.error("Failed to log in:", error);
-    }
+  const enokiFlow = useEnokiFlow();
+
+  const handleSignIn = () => {
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    // Set the redirect URL to the location that should
+    // handle authorization callbacks in your app
+    const redirectUrl = `${protocol}//${host}/auth`;
+
+    enokiFlow
+      .createAuthorizationURL({
+        provider: 'google',
+        network: 'testnet',
+        clientId: google_client_id,
+        redirectUrl,
+        extraParams: {
+          scope: ['openid', 'email', 'profile'],
+        },
+      })
+      .then((url) => {
+        window.location.href = url;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -25,7 +46,7 @@ export default function Home() {
         <h2>Welcome to Suitable 💙</h2>
 
         {!user ? (
-          <Button onClick={handleLogin}>
+          <Button onClick={handleSignIn}>
             Login with zkLogin
           </Button>
         ) : (
