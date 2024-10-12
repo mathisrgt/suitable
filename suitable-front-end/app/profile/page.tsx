@@ -1,35 +1,68 @@
-import { Button, Card, CardFooter } from "@nextui-org/react";
+import { Button, Card, Link } from "@nextui-org/react";
 import Image from "next/image";
-import { Heart, X } from 'lucide-react';
+import { Edit3 } from 'lucide-react'; // Icon for the Edit button
 import BottomNavBar from "@/components/NavBar";
 
-export default function Discussions() {
+export default function Profile() {
+  // Sample profile data (In a real app, this would come from your blockchain or backend)
+  const userProfile = {
+    name: "Mathis",
+    age: 25,
+    bio: "Loves music, travel, and trying out new food! Always up for an adventure.",
+    location: "New York, USA",
+    interests: ["Music", "Travel", "Food", "Tech"],
+    imageUrl: "/hero-card.jpeg",
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="min-h-screen flex flex-col p-8 pb-20 gap-16 sm:p-20">
+      <main className="flex flex-col gap-8 w-full items-center">
+        {/* Profile Card */}
         <Card
           isFooterBlurred
           radius="lg"
-          className="border-none"
+          className="w-full sm:w-96 border-none flex flex-col items-center gap-4 p-4"
         >
           <Image
-            alt="Woman listing to music"
-            className="object-cover"
-            height={200}
-            src="/hero-card.jpeg"
-            width={200}
+            alt={`Profile of ${userProfile.name}`}
+            className="object-cover rounded-full"
+            height={120}
+            width={120}
+            src={userProfile.imageUrl}
           />
-          <CardFooter className="before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-            <p className="text-tiny text-white/80">Mathis</p>
-          </CardFooter>
-        </Card>
+          <div className="flex flex-col items-center">
+            <h1 className="text-2xl font-bold">{userProfile.name}, {userProfile.age}</h1>
+            <p className="text-gray-500">{userProfile.location}</p>
+            <p className="text-center mt-4 text-gray-700">{userProfile.bio}</p>
 
-        <div className="flex gap-2">
-          <Button color='danger' size="lg"><X /></Button>
-          <Button color='success' size="lg"><Heart /></Button>
-        </div>
-        <BottomNavBar />
+            {/* Interests Section */}
+            <div className="flex gap-2 mt-4">
+              {userProfile.interests.map((interest, index) => (
+                <span key={index} className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">
+                  {interest}
+                </span>
+              ))}
+            </div>
+
+            {/* Edit Button */}
+            <Link href="/edit-profile">
+              <Button
+                className="mt-6"
+                // auto
+                // flat
+                color="primary"
+              // icon={<Edit3 />}
+              // onClick={() => alert('Edit Profile')}
+              >
+                Edit Profile
+              </Button>
+            </Link>
+          </div>
+        </Card>
       </main>
+
+      {/* Bottom Navigation Bar */}
+      <BottomNavBar />
     </div>
   );
 }

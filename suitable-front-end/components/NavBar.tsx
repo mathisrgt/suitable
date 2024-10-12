@@ -8,7 +8,7 @@ export default function BottomNavBar() {
                 <Home className="text-gray-600" />
                 <span className="text-xs text-gray-600">Home</span>
             </Link>
-            <Link href="/chat" className="flex flex-col items-center">
+            <Link href="/all-chats" className="flex flex-col items-center">
                 <MessageCircle className="text-gray-600" />
                 <span className="text-xs text-gray-600">Chat</span>
             </Link>
