@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mysten/dapp-kit": "^0.14.25",
     "@mysten/enoki": "^0.4.5",
     "@nextui-org/react": "^2.4.8",
     "framer-motion": "^11.11.8",
