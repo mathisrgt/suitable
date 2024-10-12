@@ -6,6 +6,11 @@ import { Heart, X } from 'lucide-react';
 import BottomNavBar from "@/components/NavBar";
 import { useState } from "react";
 import { useSwipeable } from 'react-swipeable';
+import { Transaction } from '@mysten/sui/transactions';
+import { useSuiClient } from "@mysten/dapp-kit";
+import { useEnokiFlow } from "@mysten/enoki/react";
+import { enokiClient } from "@/services/enoki";
+import { fromBase64, toBase64 } from "@mysten/bcs";
 
 // Sample data for matches
 const matches = [
@@ -27,30 +32,72 @@ const matches = [
 ];
 
 export default function Home() {
+  const suiClient = useSuiClient();
+  const enokiFlow = useEnokiFlow();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState("");
 
-  const handleSwipe = (dir: "left" | "right") => {
+  async function handleSwipe(dir: "left" | "right") {
     setSwipeDirection(dir);
     setTimeout(() => {
       // Move to the next card after the swipe animation completes
       setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, matches.length - 1));
       setSwipeDirection(""); // Reset swipe direction for the next card
     }, 500); // Match this duration to the CSS transition duration
-  };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handleSwipe('left'),
-    onSwipedRight: () => handleSwipe('right'),
-    trackMouse: true,
-  });
+
+    // Create the tx
+
+    const tx = new Transaction();
+    const keypair = await enokiFlow.getKeypair();
+
+    tx.moveCall({
+      target: `0x68754fbe4553285775440a9a3d88720fcad7adc678d24f83f5d429ba8a237583::key::new`,
+      arguments: [],
+    });
+
+    tx.setGasBudget(1000);
+
+    const txBytes = await tx.build({
+      client: suiClient,
+      onlyTransactionKind: true,
+    });
+
+    const sponsoResp = await enokiClient.createSponsoredTransaction({
+      network: "testnet",
+      transactionKindBytes: toBase64(txBytes),
+      sender: keypair.toSuiAddress(), // TODO ??
+      allowedMoveCallTargets: ['0x68754fbe4553285775440a9a3d88720fcad7adc678d24f83f5d429ba8a237583::key::new'],
+      allowedAddresses: []
+    });
+
+    const signature = (await keypair.signTransaction(fromBase64(sponsoResp.bytes))).signature;
+
+    try {
+      const execResp = await enokiClient.executeSponsoredTransaction({
+        digest: sponsoResp.digest,
+        signature: signature,
+      });
+
+      console.log('Result of the swip:', execResp)
+    } catch (e) {
+      console.log(e)
+    }
+
+    const handlers = useSwipeable({
+      onSwipedLeft: () => handleSwipe('left'),
+      onSwipedRight: () => handleSwipe('right'),
+      trackMouse: true,
+    });
+  }
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         {currentIndex < matches.length && (
           <div
-            {...handlers}
+            // {...handlers}
             className={`relative transition-transform duration-300 ease-in-out ${swipeDirection === 'left' ? '-translate-x-full' : ''
               } ${swipeDirection === 'right' ? 'translate-x-full' : ''
               }`}
@@ -74,6 +121,7 @@ export default function Home() {
           <Button color='danger' size="lg" className="rounded-3xl" onClick={() => handleSwipe('left')}><X /></Button>
           <Button color='success' size="lg" className="rounded-3xl" onClick={() => handleSwipe('right')}><Heart color='white' /></Button>
         </div>
+
         <BottomNavBar />
       </main>
     </div>

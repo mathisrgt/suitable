@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Home, User, MessageCircle } from 'lucide-react';
+import { Home, User, MessageCircle, HandCoins } from 'lucide-react';
 import { Badge } from "@nextui-org/react";
 
 export default function BottomNavBar() {
@@ -13,6 +13,12 @@ export default function BottomNavBar() {
                 <Link href="/all-chats" className="flex flex-col items-center">
                     <MessageCircle className="text-gray-600" />
                     <span className="text-xs text-gray-600">Chat</span>
+                </Link>
+            </Badge>
+            <Badge content="!" color="danger" className="flex flex-col">
+                <Link href="/reward" className="flex flex-col items-center">
+                    <HandCoins className="text-gray-600" />
+                    <span className="text-xs text-gray-600">Reward</span>
                 </Link>
             </Badge>
             <Link href="/account" className="flex flex-col items-center">

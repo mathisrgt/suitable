@@ -20,7 +20,6 @@ export default function Home() {
     const host = window.location.host;
 
     const redirectUrl = `${protocol}//${host}/auth`;
-    // const redirectUrl = 'https://2c2460e8b857.ngrok.app/auth';
 
     enokiFlow
       .createAuthorizationURL({

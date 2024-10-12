@@ -10,14 +10,10 @@ import BottomNavBar from "@/components/NavBar";
 import { useEffect } from "react";
 import { useSuiClient } from "@mysten/dapp-kit";
 
-import { useRouter } from "next/router";
-
 export default function Auth() {
   const { handled } = useAuthCallback();
   const client = useSuiClient();
   const enokiFlow = useEnokiFlow();
-
-  const router = useRouter();
 
   useEffect(() => {
     if (handled) {
@@ -28,7 +24,13 @@ export default function Auth() {
   async function handleConnection() {
     const keypair = await enokiFlow.getKeypair();
     console.log("User connected - Public key:", keypair.getPublicKey().toSuiAddress());
-    router.push("/match");
+
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+
+    const redirectUrl = `${protocol}//${host}/match`;
+    window.location.href = redirectUrl;
+
   }
 
   return (
