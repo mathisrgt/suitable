@@ -4,19 +4,28 @@ import { Button, Card, CardBody, CardHeader, Link, Progress, Skeleton, Spinner, 
 import Image from "next/image";
 import { Lock, LockOpen } from 'lucide-react';
 
-import { useAuthCallback } from "@mysten/enoki/react";
+import { useAuthCallback, useEnokiFlow } from "@mysten/enoki/react";
 
 import BottomNavBar from "@/components/NavBar";
 import { useEffect } from "react";
+import { useSuiClient } from "@mysten/dapp-kit";
 
 export default function Auth() {
   const { handled } = useAuthCallback();
+  const client = useSuiClient();
+  const enokiFlow = useEnokiFlow();
 
   useEffect(() => {
     if (handled) {
-
+      handleButtonClick();
     }
   }, [handled]);
+
+  async function handleButtonClick() {
+    // Get the keypair for the current user.
+    const keypair = await enokiFlow.getKeypair();
+    console.log("here is the keypair", keypair);
+  }
 
   return (
     <div className="min-h-screen flex flex-col p-8 pb-20 gap-16 sm:p-20">
