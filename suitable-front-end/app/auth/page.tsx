@@ -24,7 +24,7 @@ export default function Auth() {
   async function handleButtonClick() {
     // Get the keypair for the current user.
     const keypair = await enokiFlow.getKeypair();
-    console.log("here is the public key:", keypair.getPublicKey);
+    console.log("here is the public key:", keypair.getPublicKey());
   }
 
   return (
