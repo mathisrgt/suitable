@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button, Link } from "@nextui-org/react";
 import Image from "next/image";
 import BottomNavBar from "@/components/NavBar";
+import { Send } from 'lucide-react';
 
 // Sample chat data
 const chatData = {
   name: "Jon",
-  profileImage: "/path/to/jon.jpg", // Replace with actual image path
+  profileImage: "/man1.jpg", // Replace with actual image path
   messages: [
     { id: 1, text: "Love the donut pic. Is that at SK donuts?", sender: "Jon", timestamp: "10:00 AM" },
     { id: 2, text: "Absolutely. It’s the best. Would you want to go this weekend?", sender: "You", timestamp: "10:01 AM" },
@@ -32,24 +33,26 @@ export default function Chat() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col p-8 pb-20 gap-16 sm:p-20">
+    <div className="min-h-screen flex flex-col p-8 pb-20 gap-8 sm:p-20">
       {/* Header with contact name and image */}
-      <div className="flex items-center mb-4">
-        <Image
-          src={chatData.profileImage}
-          alt={chatData.name}
-          width={50}
-          height={50}
-          className="rounded-full object-cover mr-4"
-        />
-        <h1 className="text-2xl font-bold">{chatData.name}</h1>
-      </div>
+      <Link href='/profile'>
+        <div className="flex items-center mb-4">
+          <Image
+            src={chatData.profileImage}
+            alt={chatData.name}
+            width={50}
+            height={50}
+            className="rounded-full object-cover mr-4"
+          />
+          <h1 className="text-2xl font-bold">{chatData.name}</h1>
+        </div>
+      </Link>
 
       {/* Messages Container */}
-      <div className="flex flex-col gap-4 w-full overflow-y-auto max-h-[60vh] border rounded-lg p-4 bg-gray-100">
+      <div className="flex flex-col gap-4 w-full overflow-y-auto max-h-[60vh] border rounded-lg p-4">
         {messages.map((message) => (
           <div key={message.id} className={`flex ${message.sender === "You" ? "justify-end" : "justify-start"}`}>
-            <div className={`p-3 rounded-lg ${message.sender === "You" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}>
+            <div className={`p-3 rounded-xl ${message.sender === "You" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}>
               <p>{message.text}</p>
               <p className="text-xs text-gray-500 mt-1">{message.timestamp}</p>
             </div>
@@ -65,7 +68,9 @@ export default function Chat() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button onClick={sendMessage}>Send</Button>
+        <Button onClick={sendMessage} color="primary">
+          <Send size='20' />
+        </Button>
       </div>
 
       {/* Bottom Navigation Bar */}

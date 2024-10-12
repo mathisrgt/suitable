@@ -1,10 +1,10 @@
-import { Button, Card, Link } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Link, Progress, Skeleton, Textarea } from "@nextui-org/react";
 import Image from "next/image";
-import { Edit3 } from 'lucide-react'; // Icon for the Edit button
+import { Lock, LockOpen } from 'lucide-react';
+
 import BottomNavBar from "@/components/NavBar";
 
 export default function Profile() {
-  // Sample profile data (In a real app, this would come from your blockchain or backend)
   const userProfile = {
     name: "Mathis",
     age: 25,
@@ -17,7 +17,6 @@ export default function Profile() {
   return (
     <div className="min-h-screen flex flex-col p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-8 w-full items-center">
-        {/* Profile Card */}
         <Card
           isFooterBlurred
           radius="lg"
@@ -44,20 +43,101 @@ export default function Profile() {
               ))}
             </div>
 
-            {/* Edit Button */}
-            <Link href="/edit-profile">
-              <Button
-                className="mt-6"
-                // auto
-                // flat
-                color="primary"
-              // icon={<Edit3 />}
-              // onClick={() => alert('Edit Profile')}
-              >
-                Edit Profile
-              </Button>
-            </Link>
           </div>
+          <Button className="w-full mt-2 text-white text-lg font-semibold shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 transform hover:scale-105 transition-transform" size="lg" color="secondary">
+            <LockOpen size='15' />
+            Unlock full profile now
+          </Button>
+        </Card>
+
+        <Card
+          isFooterBlurred
+          radius="lg"
+          className="w-full sm:w-96 border-none flex flex-col items-center p-4"
+        >
+          <CardHeader className="justify-between">
+            <h4 className="font-bold text-large">What makes you different?</h4>
+            <Lock size='20' />
+          </CardHeader>
+          <CardBody>
+            {false ? (
+              <Textarea
+                isDisabled
+                defaultValue="NextUI is a React UI library that provides a set of accessible, reusable, and beautiful components."
+              />
+            ) : (
+              <div className="flex flex-col gap-4">
+                <Progress color="primary" aria-label="Loading..." value={100} />
+
+                {/* Wrapping the Button and Skeleton in a relative div */}
+                <div className="relative w-full">
+                  <Skeleton className="rounded-lg">
+                    <div className="h-24 rounded-lg bg-default-300"></div>
+                  </Skeleton>
+
+                  {/* Button with absolute positioning */}
+                  <Button
+                    color="primary"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  >
+                    Request
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardBody>
+        </Card>
+
+        <Card
+          isFooterBlurred
+          radius="lg"
+          className="w-full sm:w-96 border-none flex flex-col items-center p-4"
+        >
+          <CardHeader className="justify-between">
+            <h4 className="font-bold text-large">Pictures</h4>
+            <Lock size='20' />
+          </CardHeader>
+          <CardBody>
+            {false ? (
+              <Textarea
+                isDisabled
+                defaultValue="NextUI is a React UI library that provides a set of accessible, reusable, and beautiful components."
+              />
+            ) : (
+              <div className="flex flex-col gap-4">
+                <Progress color="default" aria-label="Loading..." value={50} />
+
+                {/* Wrapping the Button and Skeleton in a relative div */}
+                <div className="relative w-full">
+                  {/* Skeleton grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <Skeleton className="rounded-lg">
+                      <div className="h-24 rounded-lg bg-default-300"></div>
+                    </Skeleton>
+                    <Skeleton className="rounded-lg">
+                      <div className="h-24 rounded-lg bg-default-300"></div>
+                    </Skeleton>
+                    <Skeleton className="rounded-lg">
+                      <div className="h-24 rounded-lg bg-default-300"></div>
+                    </Skeleton>
+                    <Skeleton className="rounded-lg">
+                      <div className="h-24 rounded-lg bg-default-300"></div>
+                    </Skeleton>
+                  </div>
+
+                  {/* Button with absolute positioning */}
+                  <Button
+                    color="default"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  >
+                    <Lock size='15' />
+                    Request
+                  </Button>
+                </div>
+              </div>
+
+            )}
+          </CardBody>
         </Card>
       </main>
 

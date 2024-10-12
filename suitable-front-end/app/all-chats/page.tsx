@@ -26,6 +26,9 @@ export default function AllChats() {
   return (
     <div className="min-h-screen flex flex-col p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-8 w-full items-center">
+        <div className="align-start w-full">
+          <h1 className="text-2xl bold">Chats</h1>
+        </div>
         {/* Chat list */}
         {chats.map((chat) => (
           <Link href='/chat' className="w-full">
