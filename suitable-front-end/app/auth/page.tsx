@@ -16,6 +16,7 @@ export default function Auth() {
     if (handled) {
       // Get access token, perform security checks,
       // manage user session, handle errors, and so on.
+      alert(handled);
       window.location.href = "/";
     }
   }, [handled]);

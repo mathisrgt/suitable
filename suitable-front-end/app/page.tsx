@@ -18,8 +18,7 @@ export default function Home() {
   const handleSignIn = () => {
     const protocol = window.location.protocol;
     const host = window.location.host;
-    // Set the redirect URL to the location that should
-    // handle authorization callbacks in your app
+
     const redirectUrl = `${protocol}//${host}/auth`;
 
     enokiFlow
@@ -45,19 +44,9 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h2>Welcome to Suitable 💙</h2>
 
-        {!user ? (
-          <Button onClick={handleSignIn}>
-            Login with zkLogin
-          </Button>
-        ) : (
-          <>
-            <h3>Welcome, Stan!</h3>
-            <Button href="/match">Start Matching</Button>
-          </>
-        )}
-
-        <h3>Welcome, Stan!</h3>
-        <Link href="/match"><Button>Start Matching</Button></Link>
+        <Button onClick={handleSignIn}>
+          Login with zkLogin
+        </Button>
       </main>
     </div>
   );
