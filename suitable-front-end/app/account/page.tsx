@@ -51,11 +51,7 @@ export default function Account() {
             <Link href="/edit-profile">
               <Button
                 className="mt-6"
-                // auto
-                // flat
                 color="primary"
-              // icon={<Edit3 />}
-              // onClick={() => alert('Edit Profile')}
               >
                 Edit Profile
               </Button>

@@ -6,12 +6,10 @@ import { ArrowDown } from 'lucide-react';
 import BottomNavBar from "@/components/NavBar";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-// import { zkLogin } from "@/utils/zkLogin"; // Placeholder for zkLogin utility function
 
 export default function Home() {
   const [user, setUser] = useState(null);
 
-  // Function to handle zkLogin
   const handleLogin = async () => {
     try {
       // const userData = await zkLogin(); // zkLogin function triggers the Sui zkLogin flow
@@ -26,14 +24,12 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h2>Welcome to Suitable 💙</h2>
 
-        {/* Conditionally render the login button or a welcome message if user is authenticated */}
         {!user ? (
           <Button onClick={handleLogin}>
             Login with zkLogin
           </Button>
         ) : (
           <>
-            {/* {user.name} */}
             <h3>Welcome, Stan!</h3>
             <Button href="/match">Start Matching</Button>
           </>
