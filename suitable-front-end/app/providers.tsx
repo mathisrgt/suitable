@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { EnokiFlowProvider } from '@mysten/enoki/react';
 import { enoki_public_key } from "@/environment/zkLogin";
@@ -14,6 +14,11 @@ const { networkConfig } = createNetworkConfig({
 });
 
 const Providers: FC<any> = ({ children }) => {
+
+  useEffect(() => {
+    console.log('ENOKI PUBLIC KEY: ', enoki_public_key);
+  }, []);
+
   // if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
   return (
     <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
