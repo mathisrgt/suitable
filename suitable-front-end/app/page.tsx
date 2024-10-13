@@ -40,12 +40,21 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"
+      style={{
+        background: 'linear-gradient(to bottom right, #e4fcff, #dfebff)',
+      }}
+    >
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h2>Welcome to Suitable 💙</h2>
+        <h1>Welcome to</h1>
+        <h1 className='text-red-600 text-3xl' style={{
+          background: 'linear-gradient(to right, #FF512F, #DD2476)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}>Suitable.love</h1>
 
-        <Button onClick={handleSignIn}>
-          Login with zkLogin
+        <Button onClick={handleSignIn} color="danger">
+          Start
         </Button>
       </main>
     </div>
