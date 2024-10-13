@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, CardBody, CardHeader, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Progress, Skeleton, Textarea, useDisclosure } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Progress, Skeleton, Textarea, useDisclosure } from "@nextui-org/react";
 import Image from "next/image";
 import { Lock, LockOpen, PartyPopper } from 'lucide-react';
 
