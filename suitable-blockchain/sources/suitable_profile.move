@@ -11,6 +11,8 @@ module suitable_blockchain::suitable_profile {
 
     // Errors
     const ENotEnoughMessages: u64 = 0;
+    const ENotProfileOwner: u64 = 1;
+    const ENotDifferentUser: u64 = 2;
     
 
     // Struct definitions
@@ -66,7 +68,7 @@ module suitable_blockchain::suitable_profile {
         transfer::public_transfer(display, sender(ctx));
     }
 
-    public entry fun create_profile(description: String, private_reveal: String, social_media: String, picture_blob: address, ctx: &mut TxContext) {
+    public entry fun create_profile(description: String, private_reveal: String, social_media: String, picture_blob: address, private_picture_blob1: address, private_picture_blob2: address, private_picture_blob3: address, private_picture_blob4: address, ctx: &mut TxContext) {
         transfer::transfer(Profile {
             id: object::new(ctx),
             owner_address: sender(ctx),
@@ -74,7 +76,7 @@ module suitable_blockchain::suitable_profile {
             private_reveal,
             social_media,
             picture_blob,
-            private_pictures_blobs: vector[],
+            private_pictures_blobs: vector[private_picture_blob1, private_picture_blob2, private_picture_blob3, private_picture_blob4],
             likes: vector[],
         }, sender(ctx));
     }
@@ -108,6 +110,9 @@ module suitable_blockchain::suitable_profile {
 
     // Actions
     public entry fun add_like_status(profile: &mut Profile, other_profile: address, like: bool) {
+        assert!(sender(ctx) == profile.owner_address, ENotProfileOwner);
+        assert!(sender(ctx) != other_profile, ENotDifferentUser);
+
         let status = Like { profile: other_profile, liked: like };
         vector::push_back(&mut profile.likes, status);
     }
