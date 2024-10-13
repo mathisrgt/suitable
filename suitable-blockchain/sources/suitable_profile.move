@@ -109,7 +109,7 @@ module suitable_blockchain::suitable_profile {
     }
 
     // Actions
-    public entry fun add_like_status(profile: &mut Profile, other_profile: address, like: bool) {
+    public entry fun add_like_status(profile: &mut Profile, other_profile: address, like: bool, ctx: &TxContext) {
         assert!(sender(ctx) == profile.owner_address, ENotProfileOwner);
         assert!(sender(ctx) != other_profile, ENotDifferentUser);
 
