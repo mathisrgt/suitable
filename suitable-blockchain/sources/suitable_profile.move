@@ -7,10 +7,11 @@ module suitable_blockchain::suitable_profile {
     use sui::display;
 
     // Imports (Internal)
-    // use suitable_blockchain::suitable_chat::{Chat, send_message};
+    use suitable_blockchain::suitable_chat::{Chat, is_allowed_to_request_reveal, is_allowed_to_request_private_pictures, is_allowed_to_request_social};
 
     // Errors
-    // const ENotEnough: u64 = 0;
+    const ENotEnoughMessages: u64 = 0;
+    
 
     // Struct definitions
     public struct Like has store {
@@ -86,6 +87,26 @@ module suitable_blockchain::suitable_profile {
     //     display
     // }
 
+    // Getters
+    public entry fun get_reveal(profile: &Profile, chat: &Chat, ctx: &TxContext): String {
+        assert!(is_allowed_to_request_reveal(chat, ctx), ENotEnoughMessages);
+
+        profile.private_reveal
+    }
+
+    public entry fun get_private_pictures(profile: &Profile, chat: &Chat, ctx: &TxContext): vector<address> {
+        assert!(is_allowed_to_request_private_pictures(chat, ctx), ENotEnoughMessages);
+
+        profile.private_pictures_blobs
+    }
+
+    public entry fun get_social(profile: &Profile, chat: &Chat, ctx: &TxContext): String {
+        assert!(is_allowed_to_request_social(chat, ctx), ENotEnoughMessages);
+
+        profile.social_media
+    }
+
+    // Actions
     public entry fun add_like_status(profile: &mut Profile, other_profile: address, like: bool) {
         let status = Like { profile: other_profile, liked: like };
         vector::push_back(&mut profile.likes, status);
