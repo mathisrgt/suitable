@@ -6,16 +6,13 @@ import Image from "next/image";
 import BottomNavBar from "@/components/NavBar";
 import { Send } from 'lucide-react';
 
-// Sample chat data
 const chatData = {
-  name: "Jon",
-  profileImage: "/man1.jpg", // Replace with actual image path
+  name: "Stanislas",
+  profileImage: "/stan2.png",
   messages: [
-    { id: 1, text: "Love the donut pic. Is that at SK donuts?", sender: "Jon", timestamp: "10:00 AM" },
-    { id: 2, text: "Absolutely. It’s the best. Would you want to go this weekend?", sender: "You", timestamp: "10:01 AM" },
-    { id: 3, text: "Definitely. I’m free in the afternoon tomorrow.", sender: "Jon", timestamp: "10:02 AM" },
-    { id: 4, text: "Perfect. Should we meet at the banana stand at 2?", sender: "You", timestamp: "10:03 AM" },
-    { id: 5, text: "Awesome. See you then!", sender: "Jon", timestamp: "10:04 AM" },
+    { id: 1, text: "👋", sender: "Stan", timestamp: "10:00 AM" },
+    { id: 2, text: "👋", sender: "You", timestamp: "10:01 AM" },
+    { id: 3, text: "Hey, how's it going?", sender: "Stan", timestamp: "10:02 AM" },
   ],
 };
 
@@ -33,7 +30,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col p-8 pb-20 gap-8 sm:p-20">
+    <div className="min-h-screen flex flex-col justify-between p-8 pb-20 gap-8 sm:p-20">
       {/* Header with contact name and image */}
       <Link href='/profile'>
         <div className="flex items-center mb-4">

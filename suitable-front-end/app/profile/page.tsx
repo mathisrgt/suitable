@@ -1,6 +1,6 @@
 import { Button, Card, CardBody, CardHeader, Link, Progress, Skeleton, Textarea } from "@nextui-org/react";
 import Image from "next/image";
-import { Lock, LockOpen } from 'lucide-react';
+import { Lock, LockOpen, PartyPopper } from 'lucide-react';
 
 import BottomNavBar from "@/components/NavBar";
 
@@ -11,7 +11,7 @@ export default function Profile() {
     bio: "Loves music, travel, and trying out new food! Always up for an adventure.",
     location: "Lausanne, Switzerland",
     interests: ["Music", "Travel", "Food", "Tech"],
-    imageUrl: "/stan2.jpg",
+    imageUrl: "/stan2.png",
   };
 
   return (
@@ -44,11 +44,12 @@ export default function Profile() {
             </div>
 
           </div>
-          <Button className="w-full mt-2 text-white text-lg font-semibold shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 transform hover:scale-105 transition-transform" size="lg" color="secondary">
-            <LockOpen size='15' />
-            Unlock full profile now
-          </Button>
         </Card>
+
+        <Button className="w-full w-9/10 text-white text-lg font-semibold shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 transform hover:scale-105 transition-transform" size="lg" color="secondary">
+          <LockOpen size='15' />
+          Unlock full profile now
+        </Button>
 
         <Card
           isFooterBlurred
@@ -169,8 +170,8 @@ export default function Profile() {
                     color="default"
                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                   >
-                    <Lock size='15' />
-                    Request
+                    <PartyPopper size='15' />
+                    Earn 10 SUI
                   </Button>
                 </div>
               </div>

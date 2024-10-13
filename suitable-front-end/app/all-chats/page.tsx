@@ -1,4 +1,4 @@
-import { Card, CardFooter, Link } from "@nextui-org/react";
+import { Badge, Card, CardFooter, Link } from "@nextui-org/react";
 import Image from "next/image";
 import BottomNavBar from "@/components/NavBar";
 import { Progress } from "@nextui-org/react"; // Progress component for progression bars
@@ -30,7 +30,7 @@ export default function AllChats() {
     {
       id: 4,
       name: "Mike",
-      lastMessage: "🤨",
+      lastMessage: "😉",
       progress: 90,
       imageUrl: "/mike.png",
     },
@@ -44,7 +44,7 @@ export default function AllChats() {
           <h1 className="text-2xl bold">Chats</h1>
         </div>
         {/* Chat list */}
-        {chats.map((chat) => (
+        {chats.map((chat, index) => (
           <Link href='/chat' className="w-full">
             <Card
               key={chat.id}
@@ -64,9 +64,9 @@ export default function AllChats() {
                   <p className="font-semibold text-lg">{chat.name}</p>
                   <span className="text-gray-500 text-sm">2h ago</span>
                 </div>
-                <p className="text-gray-600">{chat.lastMessage}</p>
+                <p className={`text-gray-600 ` + (index === 0 ? 'font-bold' : '')}>{chat.lastMessage}</p>
                 <Progress
-                  color="primary"
+                  color={index === 0 ? "danger" : "primary"}
                   value={chat.progress}
                   className="mt-2"
                   size="sm"
