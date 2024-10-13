@@ -26,9 +26,8 @@ module suitable_blockchain::suitable_profile {
         private_reveal: String,
         social_media: String,
         
-        picture_url: String,                
-        private_pictures_url: vector<String>,
-        
+        picture_blob: address,                
+        private_pictures_blobs: vector<address>,
         likes: vector<Like>,
     }
 
@@ -42,7 +41,7 @@ module suitable_blockchain::suitable_profile {
             utf8(b"private_reveal"),
             utf8(b"social_media"),
             utf8(b"picture_url"),
-            utf8(b"private_picture_url"),
+            utf8(b"private_picture_blob"),
         ];
 
         let values = vector[
@@ -51,7 +50,7 @@ module suitable_blockchain::suitable_profile {
             utf8(b"{picture_url}"),
             utf8(b"{social_media}"),
             utf8(b"{private_reveal}"),
-            utf8(b"{private_picture_url}"),
+            utf8(b"{private_picture_blobs}"),
         ];
 
         let publisher = package::claim(otw, ctx);
@@ -66,18 +65,17 @@ module suitable_blockchain::suitable_profile {
         transfer::public_transfer(display, sender(ctx));
     }
 
-    public entry fun create_profile(description: String, private_reveal: String, social_media: String, picture_url: String, ctx: &mut TxContext) {
+    public entry fun create_profile(description: String, private_reveal: String, social_media: String, picture_blob: address, ctx: &mut TxContext) {
         transfer::transfer(Profile {
             id: object::new(ctx),
             owner_address: sender(ctx),
             description,
             private_reveal,
             social_media,
-            picture_url,
-            private_pictures_url: vector[],
+            picture_blob,
+            private_pictures_blobs: vector[],
             likes: vector[],
         }, sender(ctx));
-
     }
 
     // public fun get_display_object<Profile>(profile: UID, ctx: &mut TxContext): display::Display<Profile> {

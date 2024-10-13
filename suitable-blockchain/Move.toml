@@ -6,7 +6,8 @@ authors = ["Mathis Sergent", "Mathieu Laruelle"]
 
 
 [dependencies]
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "testnet-v1.31.1" }
+blob_store = { git = "https://github.com/MystenLabs/walrus-docs.git", rev = "main", subdir = "contracts/blob_store" }
 
 [addresses]
 suitable_blockchain = "0x0"
