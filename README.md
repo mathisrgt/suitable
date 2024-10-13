@@ -21,6 +21,11 @@
       - [Key Structs](#key-structs-1)
   - [Getting Started](#getting-started)
 
+
+## Links
+- **Demo Video**: [Watch here](https://www.youtube.com/watch?v=C0ZitbaNFbU)  
+- **Front-End**: [Visit SuitableLove Front-End](https://suitable-front-end.vercel.app)
+
 ## Introduction
 
 **SuitableLove** is a blockchain-powered dating platform that aims to create deep, authentic relationships by gamifying and incentivizing meaningful interactions. Designed to counter the superficiality of modern dating apps, SuitableLove offers users a unique experience with free unlimited access, secure profiles, and gradual information reveal to promote genuine connections.
@@ -49,16 +54,18 @@ While Tinder and similar apps restrict free users and focus heavily on appearanc
 - **Monetizes through Positive Engagement**: Users earn tokens (Sui) through meaningful interactions, turning dating into a rewarding experience.
 - **Promotes Trust and Privacy**: zkLogin and decentralized data storage (using FHE and time-lock encryption) ensure privacy, with user data stored securely and revealed gradually, giving users full control over their information.
 
-## Technology Implemented
+## Technology Needed
 
 - **zkLogin (Zero-Knowledge Login)**: Enables secure, seamless identity verification without compromising user privacy. Users can prove their humanity without revealing personal details.
 - **Proof of Humanity**: Ensures all profiles are genuine, creating a trustworthy environment for dating.
 - **Time-Lock Encryption**: Gradually unlocks user profile details over time, ensuring that deeper information is only revealed after meaningful interactions.
 - **Sui Blockchain Integration**: Tokens (Sui) reward users for engagement, while SuiNS is used to provide a SocialFi layer for decentralized incentives.
+- **Sponsored Transactions for Onboarding**: Facilitates a smooth onboarding process by covering transaction fees for new users, allowing them to engage with the platform without any upfront costs or barriers.
+- **Walrus Storage**: A decentralized storage solution for securely storing user data, such as social media links and additional pictures. It ensures that personal information is stored efficiently and accessed based on predefined conditions.
 
 ## Web3 Utility
 
-Web3 enables a new layer of trust, security, and engagement for SuitableLove. By utilizing blockchain-based identity verification and encrypted data storage, the platform provides a level of security and privacy not possible with traditional Web2 apps. Additionally, Web3's decentralized token system offers a fair and engaging way to incentivize user behavior without relying on paid subscriptions or restrictive monetization tactics.
+Web3 enables a new layer of trust, security, and engagement for Suitable.love. By utilizing blockchain-based identity verification and encrypted data storage, the platform provides a level of security and privacy not possible with traditional Web2 apps. Additionally, Web3's decentralized token system offers a fair and engaging way to incentivize user behavior without relying on paid subscriptions or restrictive monetization tactics.
 
 **SuitableLove** is not just another dating app; it's a reimagined platform that puts the user first, ensuring authentic connections and rewarding meaningful engagement through the power of Web3.
 
