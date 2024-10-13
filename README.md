@@ -7,7 +7,7 @@
   - [Introduction](#introduction)
   - [Problem Statement](#problem-statement)
   - [Solution](#solution)
-  - [Value Added Compared to Tinder](#value-added-compared-to-tinder)
+  - [Added Value](#added-value)
   - [Technology Implemented](#technology-implemented)
   - [Web3 Utility](#web3-utility)
   - [Product](#product)
@@ -41,7 +41,7 @@ Traditional dating apps have several core issues:
 - **Gamified Engagement**: Users are rewarded for consistent, quality interactions through tokens, incentivizing deeper conversations and longer-lasting connections.
 - **Secure and Verified Users**: All users undergo identity verification through **zkLogin (Zero-Knowledge Login)**, ensuring that interactions are genuine, with zero tolerance for bots or fake profiles.
 
-## Value Added Compared to Tinder
+## Added Value
 
 While Tinder and similar apps restrict free users and focus heavily on appearance-based matching, SuitableLove:
 
