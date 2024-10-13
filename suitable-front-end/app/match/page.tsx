@@ -53,7 +53,7 @@ export default function Home() {
     const keypair = await enokiFlow.getKeypair();
 
     tx.moveCall({
-      target: `0x68754fbe4553285775440a9a3d88720fcad7adc678d24f83f5d429ba8a237583::key::new`,
+      target: '0xb394c0ce819286ef013564057b6974c1445c292e78040f7e482df754670ce9f::counter::getCounter',
       arguments: [],
     });
 
@@ -67,8 +67,8 @@ export default function Home() {
     const sponsoResp = await enokiClient.createSponsoredTransaction({
       network: "testnet",
       transactionKindBytes: toBase64(txBytes),
-      sender: keypair.toSuiAddress(), // TODO ??
-      allowedMoveCallTargets: ['0x68754fbe4553285775440a9a3d88720fcad7adc678d24f83f5d429ba8a237583::key::new'],
+      sender: keypair.getPublicKey().toSuiAddress(),
+      allowedMoveCallTargets: ['0xb394c0ce819286ef013564057b6974c1445c292e78040f7e482df754670ce9f::counter::getCounter'],
       allowedAddresses: []
     });
 
