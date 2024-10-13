@@ -47,13 +47,12 @@ export default function Home() {
     }, 500); // Match this duration to the CSS transition duration
 
 
-    // Create the tx
-
+    // Call "all_like_unlike" from the contact
     const tx = new Transaction();
     const keypair = await enokiFlow.getKeypair();
 
     tx.moveCall({
-      target: '0xb394c0ce819286ef013564057b6974c1445c292e78040f7e482df754670ce9f::counter::getCounter',
+      target: '0xc1e58a6273a9a58e4d41c97cc5c3b420ba16c1dc3e857f80f7aef1ee938c241e::suitable_chat',
       arguments: [],
     });
 
