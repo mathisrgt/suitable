@@ -38,7 +38,5 @@ export async function executeSponsoTx(tx: Transaction, suiClient: SuiClient, eno
         }
     });
 
-    console.log('RESPONSE: ', response);
-
     return response;
 }

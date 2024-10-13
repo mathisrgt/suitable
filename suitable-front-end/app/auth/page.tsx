@@ -49,9 +49,11 @@ export default function Auth() {
         tx.pure.address('0xfeaa857c9b394931af144ba11781f1cdec26d39204777f6790332a47856a4442'),],
     });
 
-    console.log('Tx result:', executeSponsoTx(tx, suiClient, enokiFlow));
+    executeSponsoTx(tx, suiClient, enokiFlow).then((result) => {
+      console.log('RESULT - Create profile:', result);
 
-    //window.location.href = redirectUrl;
+      window.location.href = redirectUrl;
+    });
   }
 
   return (
