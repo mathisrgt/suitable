@@ -1,10 +1,14 @@
-import { Button, Card, CardBody, CardHeader, Link, Progress, Skeleton, Textarea } from "@nextui-org/react";
+"use client";
+
+import { Button, Card, CardBody, CardHeader, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Progress, Skeleton, Textarea, useDisclosure } from "@nextui-org/react";
 import Image from "next/image";
 import { Lock, LockOpen, PartyPopper } from 'lucide-react';
 
 import BottomNavBar from "@/components/NavBar";
 
 export default function Profile() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const userProfile = {
     name: "Stan",
     age: 22,
@@ -46,10 +50,28 @@ export default function Profile() {
           </div>
         </Card>
 
-        <Button className="w-full w-9/10 text-white text-lg font-semibold shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 transform hover:scale-105 transition-transform" size="lg" color="secondary">
+        <Button onPress={onOpen} className="w-full w-9/10 text-white text-lg font-semibold shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 transform hover:scale-105 transition-transform" size="lg" color="secondary">
           <LockOpen size='15' />
           Unlock full profile now
         </Button>
+
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">Discover truely Stanislas</ModalHeader>
+                <ModalBody>
+                  <p>Unlock all the profile to gain a competitive edge. 🚀</p>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="primary" onPress={onClose}>
+                    Pay 10 SUI
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
 
         <Card
           isFooterBlurred
@@ -58,7 +80,7 @@ export default function Profile() {
         >
           <CardHeader className="justify-between">
             <h4 className="font-bold text-large">What makes you different?</h4>
-            <Lock size='20' />
+            <LockOpen size='20' />
           </CardHeader>
           <CardBody>
             {false ? (

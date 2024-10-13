@@ -1,6 +1,6 @@
 "use client"; // Enable client-side rendering
 
-import { Button, Card, Link } from "@nextui-org/react";
+import { Button, Card, Link, useDisclosure } from "@nextui-org/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import BottomNavBar from "@/components/NavBar";
