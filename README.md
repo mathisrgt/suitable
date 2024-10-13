@@ -1,43 +1,67 @@
-# Suitable
-
+# SuitableLove: A New Era of Meaningful Dating
 **Decentralized dating app** developed during the Sui x BSA hackathon at EPFL - 2nd edition.
 
----
+# Table of Contents
 
-## Table of contents
+- [SuitableLove: A New Era of Meaningful Dating](#suitablelove-a-new-era-of-meaningful-dating)
+  - [Introduction](#introduction)
+  - [Problem Statement](#problem-statement)
+  - [Solution](#solution)
+  - [Added Value](#added-value)
+  - [Technology Implemented](#technology-implemented)
+  - [Web3 Utility](#web3-utility)
+  - [Product](#product)
+    - [Suitable Profile Module](#suitable-profile-module)
+      - [Module Purpose](#module-purpose)
+      - [Main Functions](#main-functions)
+      - [Key Structs](#key-structs)
+    - [Suitable Chat Module](#suitable-chat-module)
+      - [Module Purpose](#module-purpose-1)
+      - [Main Functions](#main-functions-1)
+      - [Key Structs](#key-structs-1)
+  - [Getting Started](#getting-started)
 
-1. [Summary](#summary)
-2. [Problems](#problems)
-3. [Solutions](#solutions)
-4. [Product](#product)
-   - [Features](#features)
-   - [Key Modules](#key-modules)
-     - [Suitable Profile Module](#suitable-profile-module)
-     - [Suitable Chat Module](#suitable-chat-module)
-   - [Future Developments](#future-developments)
-5. [Getting Started](#getting-started)
-6. [Contributing](#contributing)
-7. [License](#license)
+## Introduction
 
----
+**SuitableLove** is a blockchain-powered dating platform that aims to create deep, authentic relationships by gamifying and incentivizing meaningful interactions. Designed to counter the superficiality of modern dating apps, SuitableLove offers users a unique experience with free unlimited access, secure profiles, and gradual information reveal to promote genuine connections.
 
-## Summary
+## Problem Statement
 
+Traditional dating apps have several core issues:
 
+- **Superficiality of Connections**: Most users make quick decisions based almost entirely on appearance, leading to shallow, fleeting connections.
+- **Limitations for Free Users**: Platforms like Tinder impose strict limits on free users, pushing them towards paid features like extra swipes or visibility.
+- **Lack of Trust and Privacy Concerns**: Bots, fake profiles, and weak identity verification erode user trust, while personal data is often poorly managed or exploited.
 
+## Solution
 
----
+**SuitableLove** introduces a new dating experience built on Web3 and blockchain technology:
 
-## Problems
+- **Gradual Profile Reveal**: Users can engage in meaningful conversations before unlocking more detailed information, ensuring that connections are based on real interaction rather than quick judgments.
+- **Gamified Engagement**: Users are rewarded for consistent, quality interactions through tokens, incentivizing deeper conversations and longer-lasting connections.
+- **Secure and Verified Users**: All users undergo identity verification through **zkLogin (Zero-Knowledge Login)**, ensuring that interactions are genuine, with zero tolerance for bots or fake profiles.
 
+## Added Value
 
+While Tinder and similar apps restrict free users and focus heavily on appearance-based matching, SuitableLove:
 
----
+- **Provides Free, Unlimited Access**: No paid swipes or hidden costs, allowing all users to enjoy the full experience without coercive monetization.
+- **Monetizes through Positive Engagement**: Users earn tokens (Sui) through meaningful interactions, turning dating into a rewarding experience.
+- **Promotes Trust and Privacy**: zkLogin and decentralized data storage (using FHE and time-lock encryption) ensure privacy, with user data stored securely and revealed gradually, giving users full control over their information.
 
-## Solutions
+## Technology Implemented
 
+- **zkLogin (Zero-Knowledge Login)**: Enables secure, seamless identity verification without compromising user privacy. Users can prove their humanity without revealing personal details.
+- **Proof of Humanity**: Ensures all profiles are genuine, creating a trustworthy environment for dating.
+- **Time-Lock Encryption**: Gradually unlocks user profile details over time, ensuring that deeper information is only revealed after meaningful interactions.
+- **Sui Blockchain Integration**: Tokens (Sui) reward users for engagement, while SuiNS is used to provide a SocialFi layer for decentralized incentives.
 
----
+## Web3 Utility
+
+Web3 enables a new layer of trust, security, and engagement for SuitableLove. By utilizing blockchain-based identity verification and encrypted data storage, the platform provides a level of security and privacy not possible with traditional Web2 apps. Additionally, Web3's decentralized token system offers a fair and engaging way to incentivize user behavior without relying on paid subscriptions or restrictive monetization tactics.
+
+**SuitableLove** is not just another dating app; it's a reimagined platform that puts the user first, ensuring authentic connections and rewarding meaningful engagement through the power of Web3.
+
 
 ## Product
 
@@ -62,14 +86,12 @@ The `suitable_profile` module enables users to:
 - `get_social(profile: &Profile, chat: &Chat, ctx: &TxContext)`
 - `add_like_unlike(profile: &mut Profile, other_profile: address, like: bool, ctx: &TxContext)`
 
----
 
 #### Key Structs
 
 - **Profile**: Represents the user's dating profile with fields like description, social media, and private picture blobs.
 - **Like**: Records whether a user liked or disliked another profile.
 
----
 
 ### Suitable Chat Module
 
@@ -92,7 +114,6 @@ The `suitable_chat` module enables users to:
 - `is_allowed_to_request_social(chat: &Chat, ctx: &TxContext)`
 - `send_message(chat: &mut Chat, last_messages_url: String)`
 
----
 
 #### Key Structs
 
