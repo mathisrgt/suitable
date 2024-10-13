@@ -19,22 +19,11 @@ The `suitable_profile` module enables users to:
 ### Main Functions
 
 - `init(otw: SUITABLE_PROFILE, ctx: &mut TxContext)`
-  - Initializes the profile module and enables the display of key fields such as owner address, description, and pictures.
-
 - `create_profile(description: String, private_reveal: String, social_media: String, picture_blob: address, private_picture_blob1: address, ..., ctx: &mut TxContext)`
-  - Creates a new profile with information like description, social media, and picture blobs (on Walrus).
-
 - `get_reveal(profile: &Profile, chat: &Chat, ctx: &TxContext)`
-  - Retrieves private reveal information based on chat conditions.
-
 - `get_private_pictures(profile: &Profile, chat: &Chat, ctx: &TxContext)`
-  - Returns private pictures after certain conditions are met.
-
 - `get_social(profile: &Profile, chat: &Chat, ctx: &TxContext)`
-  - Retrieves social media links after chat conditions are satisfied.
-
 - `add_like_unlike(profile: &mut Profile, other_profile: address, like: bool, ctx: &TxContext)`
-  - Adds a like or dislike status for another user's profile.
 
 ---
 
@@ -42,6 +31,35 @@ The `suitable_profile` module enables users to:
 
 - **Profile**: Represents the user's dating profile with fields like description, social media, and private picture blobs.
 - **Like**: Records whether a user liked or disliked another profile.
+
+---
+
+## Suitable Chat Module
+
+The `suitable_chat` module handles the core communication between users within the Suitable app. It provides the ability to create chats, exchange messages, and verify if certain conditions have been met for unlocking additional profile information (like additional pictures or social media links).
+
+### Module Purpose
+
+The `suitable_chat` module enables users to:
+- Create and manage chat sessions between two users.
+- Send and store messages on `Walrus`.
+
+### Main Functions
+
+- `init(_ctx: &mut TxContext)`
+- `create_chat(other_user: address, messages_init_url: String, ctx: &mut TxContext)`
+- `nb_messages(chat: &Chat)`
+- `get_last_messages(chat: &Chat, ctx: &TxContext)`
+- `is_allowed_to_request_reveal(chat: &Chat, ctx: &TxContext)`
+- `is_allowed_to_request_private_pictures(chat: &Chat, ctx: &TxContext)`
+- `is_allowed_to_request_social(chat: &Chat, ctx: &TxContext)`
+- `send_message(chat: &mut Chat, last_messages_url: String)`
+
+---
+
+### Key Structs
+
+- **Chat**: Represents a chat session between two users, storing the user addresses, all messages (as URLs), and the last message URL.
 
 ---
 
