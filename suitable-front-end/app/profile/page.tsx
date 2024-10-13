@@ -6,12 +6,12 @@ import BottomNavBar from "@/components/NavBar";
 
 export default function Profile() {
   const userProfile = {
-    name: "Mathis",
-    age: 25,
+    name: "Stan",
+    age: 22,
     bio: "Loves music, travel, and trying out new food! Always up for an adventure.",
-    location: "New York, USA",
+    location: "Lausanne, Switzerland",
     interests: ["Music", "Travel", "Food", "Tech"],
-    imageUrl: "/hero-card.jpeg",
+    imageUrl: "/stan2.jpg",
   };
 
   return (
@@ -125,6 +125,45 @@ export default function Profile() {
                     </Skeleton>
                   </div>
 
+                  {/* Button with absolute positioning */}
+                  <Button
+                    color="default"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  >
+                    <Lock size='15' />
+                    Request
+                  </Button>
+                </div>
+              </div>
+
+            )}
+          </CardBody>
+        </Card>
+
+        <Card
+          isFooterBlurred
+          radius="lg"
+          className="w-full sm:w-96 border-none flex flex-col items-center p-4"
+        >
+          <CardHeader className="justify-between">
+            <h4 className="font-bold text-large">Social Media</h4>
+            <Lock size='20' />
+          </CardHeader>
+          <CardBody>
+            {false ? (
+              <Textarea
+                isDisabled
+                defaultValue="NextUI is a React UI library that provides a set of accessible, reusable, and beautiful components."
+              />
+            ) : (
+              <div className="flex flex-col gap-4">
+                <Progress color="default" aria-label="Loading..." value={25} />
+
+                {/* Wrapping the Button and Skeleton in a relative div */}
+                <div className="relative w-full">
+                  <Skeleton className="rounded-lg">
+                    <div className="h-24 rounded-lg bg-default-300"></div>
+                  </Skeleton>
                   {/* Button with absolute positioning */}
                   <Button
                     color="default"

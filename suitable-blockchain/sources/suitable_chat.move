@@ -13,9 +13,9 @@ module suitable_blockchain::suitable_chat {
 
     // Struct definitions
     public struct Chat has key, store {
-        id: UID,                        // Unique identifier for each chat
-        user1: address,                 // Address of the sender
-        user2: address,                 // Address of the receiver
+        id: UID,                            // Unique identifier for each chat
+        user1: address,                     // Address of the sender
+        user2: address,                     // Address of the receiver
         all_messages_url: vector<String>,   // All messages sent between the two profiles (Walrus URLs)
         last_messages_url: String,          // Last message update stored and encrypted off-chain on Walrus (URL)
     }

@@ -14,7 +14,6 @@ module suitable_blockchain::suitable_profile {
     const ENotProfileOwner: u64 = 1;
     const ENotDifferentUser: u64 = 2;
     
-
     // Struct definitions
     public struct Like has store {
         profile: address,
@@ -109,7 +108,7 @@ module suitable_blockchain::suitable_profile {
     }
 
     // Actions
-    public entry fun add_like_status(profile: &mut Profile, other_profile: address, like: bool, ctx: &TxContext) {
+    public entry fun add_like_unlike(profile: &mut Profile, other_profile: address, like: bool, ctx: &TxContext) {
         assert!(sender(ctx) == profile.owner_address, ENotProfileOwner);
         assert!(sender(ctx) != other_profile, ENotDifferentUser);
 

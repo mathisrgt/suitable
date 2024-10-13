@@ -8,17 +8,31 @@ export default function AllChats() {
   const chats = [
     {
       id: 1,
-      name: "Mathis",
-      lastMessage: "Hey! How’s it going?",
-      progress: 70, // This represents the chat progression (e.g., 70%)
-      imageUrl: "/hero-card.jpeg", // Profile image
+      name: "Stan",
+      lastMessage: "Hey! How's is it going?",
+      progress: 10,
+      imageUrl: "/stan2.png",
     },
     {
       id: 2,
-      name: "Lily",
+      name: "Marie",
       lastMessage: "Nice to meet you!",
-      progress: 30, // Progress could be based on message count or any other criteria
-      imageUrl: "/hero-card.jpeg",
+      progress: 30,
+      imageUrl: "/marie.png",
+    },
+    {
+      id: 3,
+      name: "Diana",
+      lastMessage: "I love Walrus too. Do you...",
+      progress: 40,
+      imageUrl: "/diana.png",
+    },
+    {
+      id: 4,
+      name: "Mike",
+      lastMessage: "🤨",
+      progress: 90,
+      imageUrl: "/mike.png",
     },
     // Add more chats as needed
   ];

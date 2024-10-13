@@ -4,39 +4,55 @@ import { Button, Card, CardFooter } from "@nextui-org/react";
 import Image from "next/image";
 import { Heart, X } from 'lucide-react';
 import BottomNavBar from "@/components/NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSwipeable } from 'react-swipeable';
 import { Transaction } from '@mysten/sui/transactions';
 import { useSuiClient } from "@mysten/dapp-kit";
 import { useEnokiFlow } from "@mysten/enoki/react";
-import { enokiClient } from "@/services/enoki";
-import { fromBase64, toBase64 } from "@mysten/bcs";
+import { module_address } from "@/environment/module";
+import { executeSponsoTx } from "@/services/sponso";
 
-// Sample data for matches
+// Sample data for matches with object addresses/IDs
 const matches = [
   {
     id: 1,
-    name: "Mathis",
-    image: "/man1.jpg",
+    name: "Stan",
+    objectId: "qC5TRUsAYGN-o3d128SanMhupCd3rV21vKbqYAXzd70",
+    userAddress: "0xfeaa857c9b394931af144ba11781f1cdec26d39204777f6790332a47856a4442",
   },
   {
     id: 2,
-    name: "Alice",
-    image: "/woman1.jpg",
+    name: "Mathis",
+    objectId: "8GJzPT4IVWQ_mAdG5ngJ8iFSIK6P1eP3D_9jnqUZj24",
+    userAddress: "0xbdc977c979c9ba1d7a3f4db86db6da37fd01295f327bf4467d615f55ed2d3bc4",
   },
   {
     id: 3,
-    name: "Bob",
-    image: "/woman2.jpg",
+    name: "Mathieu",
+    objectId: "iGUZ-zmdIHD4OC9Ek-8dcHSJn2dr3RwBZnFI-S5ki_I",
+    userAddress: "0xb1ad4cfd5b9cc3d26fce5fa476bfe6c303fed3b5283b651b13da69c284cff924",
   },
 ];
 
-export default function Home() {
+// Walrus API URLs
+const WALRUS_AGGREGATOR_URL = "https://aggregator-devnet.walrus.space";
+
+export default function Match() {
   const suiClient = useSuiClient();
   const enokiFlow = useEnokiFlow();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState("");
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Function to fetch image URLs for the matches
+    const fetchImages = async () => {
+      const urls = matches.map(match => `${WALRUS_AGGREGATOR_URL}/v1/${match.objectId}`);
+      setImageUrls(urls);
+    };
+    fetchImages();
+  }, []);
 
   async function handleSwipe(dir: "left" | "right") {
     setSwipeDirection(dir);
@@ -46,57 +62,28 @@ export default function Home() {
       setSwipeDirection(""); // Reset swipe direction for the next card
     }, 500); // Match this duration to the CSS transition duration
 
-
-    // Call "all_like_unlike" from the contact
+    // Call "add_like_unlike" from the smart contract
     const tx = new Transaction();
-    const keypair = await enokiFlow.getKeypair();
 
     tx.moveCall({
-      target: '0xc1e58a6273a9a58e4d41c97cc5c3b420ba16c1dc3e857f80f7aef1ee938c241e::suitable_chat',
-      arguments: [],
+      target: `${module_address}::suitable_profile::add_like_unlike`,
+      arguments: [
+        tx.pure.address(matches[currentIndex].userAddress),
+        tx.pure.address('0xfeaa857c9b394931af144ba11781f1cdec26d39204777f6790332a47856a4442'), // Example user address
+        tx.pure.bool(dir === 'right')
+      ],
     });
 
-    tx.setGasBudget(1000);
-
-    const txBytes = await tx.build({
-      client: suiClient,
-      onlyTransactionKind: true,
-    });
-
-    const sponsoResp = await enokiClient.createSponsoredTransaction({
-      network: "testnet",
-      transactionKindBytes: toBase64(txBytes),
-      sender: keypair.getPublicKey().toSuiAddress(),
-      allowedMoveCallTargets: ['0xb394c0ce819286ef013564057b6974c1445c292e78040f7e482df754670ce9f::counter::getCounter'],
-      allowedAddresses: []
-    });
-
-    const signature = (await keypair.signTransaction(fromBase64(sponsoResp.bytes))).signature;
-
-    try {
-      const execResp = await enokiClient.executeSponsoredTransaction({
-        digest: sponsoResp.digest,
-        signature: signature,
-      });
-
-      console.log('Result of the swip:', execResp)
-    } catch (e) {
-      console.log(e)
-    }
-
-    const handlers = useSwipeable({
-      onSwipedLeft: () => handleSwipe('left'),
-      onSwipedRight: () => handleSwipe('right'),
-      trackMouse: true,
+    executeSponsoTx(tx, suiClient, enokiFlow).then((result) => {
+      console.log('RESULT - Like/Unlike:', result);
     });
   }
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        {currentIndex < matches.length && (
+        {currentIndex < matches.length && imageUrls.length > 0 && (
           <div
-            // {...handlers}
             className={`relative transition-transform duration-300 ease-in-out ${swipeDirection === 'left' ? '-translate-x-full' : ''
               } ${swipeDirection === 'right' ? 'translate-x-full' : ''
               }`}
@@ -106,7 +93,7 @@ export default function Home() {
                 alt={matches[currentIndex].name}
                 className="object-cover"
                 height={300}
-                src={matches[currentIndex].image}
+                src={imageUrls[currentIndex]} // Dynamically load image using object ID
                 width={300}
               />
               <CardFooter className="before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
